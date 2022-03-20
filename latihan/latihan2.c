@@ -29,14 +29,15 @@ void push(Stack *S, ItemType x) {
   }
 }
 
-void pop(Stack *S) {
+int pop(Stack *S) {
   ItemType temp;
   if (isEmpty(S)) {
     printf("Stack kosong, tidak dapat mengambil data\n");
+    return 0;
   } else {
     S->count--;
     temp = S->item[S->count];
-    printf("%d", temp);
+    return temp;
   }
 }
 
@@ -47,7 +48,7 @@ void decimalToBinary(Stack *S, ItemType n) {
   }
   printf("Binary : ");
   while (S->count > 0) {
-    pop(S);
+    printf("%d",pop(S));
   }
 }
 
@@ -58,46 +59,46 @@ void decimalToOctal(Stack *S, ItemType n) {
   }
   printf("Octal : ");
   while (S->count > 0) {
-    pop(S);
+    printf("%d",pop(S));
   }
 }
 
 void decimalToHexadecimal(Stack *S, ItemType n) {
   int hexResult;
-  char letter;
   while (n != 0) {
-    hexResult = n%16;
-    push(S, hexResult);
+    push(S, n%16);
     n /= 16;
-
-    switch(hexResult) {
-      case 10:
-        letter = 'A';
-        break;
-      case 11:
-        letter = 'B';
-        break;
-      case 12:
-        letter = 'C';
-        break;
-      case 13:
-        letter = 'D';
-        break;
-      case 14:
-        letter = 'E';
-        break;
-      case 15:
-        letter = 'F';
-        break;
-    }
   }
   printf("Hexadecimal : ");
   while (S->count > 0) {
-    if (hexResult < 10) {
-      pop(S);
-    } else {
-      printf("%c", letter);
-      break;
+    hexResult = pop(S);
+    switch(hexResult) {
+      case 10:
+        hexResult = 'A';
+        printf("%c", hexResult);
+        break;
+      case 11:
+        hexResult = 'B';
+        printf("%c", hexResult);
+        break;
+      case 12:
+        hexResult = 'C';
+        printf("%c", hexResult);
+        break;
+      case 13:
+        hexResult = 'D';
+        printf("%c", hexResult);
+        break;
+      case 14:
+        hexResult = 'E';
+        printf("%c", hexResult);
+        break;
+      case 15:
+        hexResult = 'F';
+        printf("%c", hexResult);
+        break;
+      default:
+        printf("%d", hexResult);
     }
   }
 }
